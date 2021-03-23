@@ -1,0 +1,38 @@
+# CS231n Summary Study
+- Member: @nepersica, @jungin5900, @maveltoz
+- Duration: 2021/03/29 ~ 2021/04/19
+- Objective: One video per day, One summary per day (iterate over members)
+
+## Iteration
+- Lecture 1 - Introduction to Convolutional Neural Networks for Visual Recognition
+  - Assignee: None (Skip)
+- Lecture 2 - Image Classification
+  - Assignee: @jungin500
+- Lecture 3 - Loss Functions and Optimization
+  - Assignee: @maveltoz
+- Lecture 4 - Introduction to Neural Networks
+  - Assignee: @nepersica
+- Lecture 5 - Convolutional Neural Networks
+  - Assignee: @jungin500
+- Lecture 6 - Training Neural Networks I
+  - Assignee: @maveltoz
+- Lecture 7 - Training Neural Networks II
+  - Assignee: @nepersica
+- Lecture 8 - Deep Learning Software
+  - Assignee: @jungin500
+- Lecture 9 - CNN Architectures
+  - Assignee: @maveltoz
+- Lecture 10 - Recurrent Neural Networks
+  - Assignee: @nepersica
+- Lecture 11 - Detection and Segmentation
+  - Assignee: @jungin500
+- Lecture 12 - Visualizing and Understanding
+  - Assignee: @maveltoz
+- Lecture 13 - Generative Models
+  - Assignee: @nepersica
+- Lecture 14 - Deep Reinforcement Learning
+  - Assignee: @jungin500
+- Lecture 15 - Efficient Methods and Hardware for Deep Learning
+  - Assignee: @nepersica
+- Lecture 16 - Adversarial Examples and Adversarial Training
+  - Assignee: @maveltoz
