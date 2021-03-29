@@ -1,10 +1,11 @@
 # CS231n Summary Study
-- Member: @nepersica, @jungin5900, @maveltoz
+- Member: @nepersica, @jungin500, @maveltoz
 - Duration: 2021/03/29 ~ 2021/04/19
 - Objective: One video per day, One summary per day (iterate over members)
 
 ## Iteration
 - Lecture 1 - Introduction to Convolutional Neural Networks for Visual Recognition
+  - Date: 2021/03/29(Mon)
   - Assignee: None (Skip)
 - Lecture 2 - Image Classification
   - Assignee: @jungin500
@@ -33,6 +34,6 @@
 - Lecture 14 - Deep Reinforcement Learning
   - Assignee: @jungin500
 - Lecture 15 - Efficient Methods and Hardware for Deep Learning
-  - Assignee: @nepersica
-- Lecture 16 - Adversarial Examples and Adversarial Training
   - Assignee: @maveltoz
+- Lecture 16 - Adversarial Examples and Adversarial Training
+  - Assignee: @nepersica
