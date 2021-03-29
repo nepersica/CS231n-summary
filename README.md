@@ -3,7 +3,11 @@
 - Duration: 2021/03/29 ~ 2021/04/19
 - Objective: One video per day, One summary per day (iterate over members)
 
-## Iteration
+## Study Materials
+- CS231n (Stanford University, 2017 Spring): https://www.youtube.com/playlist?list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk
+- CS231n korean subtitle: https://github.com/visionNoob/CS231N_17_KOR_SUB
+
+## Study Timeline
 - Lecture 1 - Introduction to Convolutional Neural Networks for Visual Recognition
   - Date: 2021/03/29(Mon)
   - Assignee: None (Skip)
