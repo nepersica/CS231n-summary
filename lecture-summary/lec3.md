@@ -5,7 +5,6 @@
 
 ![image](https://user-images.githubusercontent.com/37270069/113320077-13ddcd00-934d-11eb-8ff3-ab73cdd14d12.png)
 
-
 앞서 2장에서는 linear classifier에 W값을 사용한다는 것을 배웠다.
 위 사진에서 고양이, 자동차, 개구리의 각 class에 대한 score를 보면,
 자동차는 automobile이 가장 높은 score로 나타났기에 잘 분류했다고 볼 수 있지만,
