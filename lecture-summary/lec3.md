@@ -12,10 +12,10 @@
 즉, 이러한 좋지 못한 score가 나타나도록 영향을 준 W값이 좋지 못하다는 것을 의미한다.
 이는 좋은 score 값을 가지기 위해서는 좋은 W값을 가져야 한다는 것이고,
 따라서 어떤 W값이 가장 좋은지를 결정하기 위해서는 W값이 좋은지 나쁜지에 대해 정량화할 방법이 필요하다.
-이것이 바로 Loss Function, 즉 '손실함수' 이다.
+이것이 바로 **Loss Function, 즉 '손실함수'** 이다.
 이러한 손실함수를 통해 W값이 좋은지 나쁜지를 알게 되었다면, 우리가 실제로 원하는 것은 W가 될 수 있는 모든 경우의 수에 대해서 가장 좋은 W가 무엇인지를 찾는 것이다.
-이 과정을 Optimization, 즉 '최적화' 라고 한다.
-이번 3장에서는 이 Loss Function, Optimization에 대해 핵심적으로 알아본다.
+이 과정을 **Optimization, 즉 '최적화'** 라고 한다.
+이번 3장에서는 Loss Functionr과 Optimization에 대해 핵심적으로 알아본다.
 
 
 ## Loss Functions
@@ -34,7 +34,7 @@ Loss는 모델에 의한 예측 이미지 label과 실제 이미지 label의 일
 
 ![image](https://user-images.githubusercontent.com/37270069/113321223-58b63380-934e-11eb-9648-dea8757e4b58.png)
 
-첫 번째로 알아볼 Loss는 서포트 벡터 머신(SVM) Loss 이다.
+첫 번째로 알아볼 Loss는 **서포트 벡터 머신(SVM) Loss** 이다.
 SVM Loss는 각각의 트레이닝 데이터에서의 Loss인 L_i를 구하기 위해 다음과 같은 방법을 사용한다.
 각 이미지의 실제 label에 해당하는 score를 s_yi라 하고, 이 외의 나머지 label에 해당하는 score를 s_j라고 할 때,
 정답 클래스의 score인 s_yi가 오답 클래스의 score인 s_j보다 높고, 그 격차가 일정 마진(safety margin) 이상이라면 Loss는 0이다.
@@ -59,37 +59,38 @@ SVM Loss가 중요시하는 것은 각 score가 정확히 몇인지가 아니라
 
 SVM Loss에 대한 직관적인 이해를 위해 몇 가지 질문들로 다시 접근해본다.
 
-1) 만약 정답 score값이 오답 score값보다 훨씬 클 때, 정답 score값이 조금 변한다면 Loss에도 변화가 있을까?
-결론부터 말하면, Loss는 변하지 않는다.
+1) **만약 정답 score값이 오답 score값보다 훨씬 클 때, 정답 score값이 조금 변한다면 Loss에도 변화가 있을까?**  
+*Loss는 변하지 않는다.*  
 정답 클래스의 score값이 오답 클래스의 score값보다 훨씬 크기에, score값이 조금 바뀐다고 해도 서로 간의 간격은 여전히 유지될 것이고, 결국 Loss는 변하지 않고 계속 0이라는 것이다.
 이는 SVM Loss의 근본적인 특성 중 하나이다.
 SVM Loss는 score값이 정확히 몇인지는 중요하지 않고, 정답 클래스의 score값이 오답 클래스의 score값보다 높은지만 관심 있기 때문에, 데이터에 '둔감'하다는 것이다.
 
-2) SVM Loss의 최솟값과 최댓값은 얼마일까?
+2) **SVM Loss의 최솟값과 최댓값은 얼마일까?**  
+*최솟값은 0이고, 최댓값은 무한대이다.*  
 모든 클래스의 걸쳐서 정답 클래스의 score가 가장 크다면, 해당 training set의 최종 loss는 0이다.
 만약 정답 클래스의 score가 엄청 낮은 음수 값을 가지고 있다면, loss는 무한대가 될 것이다.
 따라서 SVM Loss의 최솟값은 0, 최댓값은 무한대이며, 이는 위의 SVM Loss 그래프를 통해 쉽게 알 수 있다.
 
-3) 파라미터를 초기화하고 처음부터 학습시킬 때 보통 W를 임의의 작은 수로 초기화하는데, 그렇다면 처음 학습 시에는 결과 score가 임의의 일정한 값을 갖게 된다. 이때, 만약 모든 score가 거의 '0에 가깝고', '값이 서로 거의 비슷하다면' Loss는 어떻게 될까? (safety margin = 1)
-정답은 'Class 수 - 1'이다.
+3) **파라미터를 초기화하고 처음부터 학습시킬 때 보통 W를 임의의 작은 수로 초기화하는데, 그렇다면 처음 학습 시에는 결과 score가 임의의 일정한 값을 갖게 된다. 이때, 만약 모든 score가 거의 '0에 가깝고', '값이 서로 거의 비슷하다면' Loss는 어떻게 될까? (safety margin = 1)**  
+*Loss는 'Class 수 - 1'이다.*  
 SVM Loss는 loss를 계산할 때 정답이 아닌 클래스를 순회한다.
 즉, (Class 수 - 1)개의 클래스를 순회하는데, 비교하는 두 score가 거의 비슷하기에, safety margin에 해당하는 값을 얻게 된다. # max(0, 0 - 0 + (safety margin)) = safety margin
 safety margin이 1이라고 하면, 최종 loss 값은 (Class 수 - 1) * (safety margin) = Class 수 -1 이 된다.
 이는 디버깅 전략으로 굉장히 유용하다.
 예를 들어, Training을 처음 시작할 때 Loss가 C-1이 아니라면 오류가 있다는 것을 의미하며, 이를 'sanity check'라고 부른다.
 
-4) SVM Loss에서는 정답 클래스의 score를 빼고 계산을 하는데, 만약 정답 클래스의 score도 포함해서 계산을 하면 어떻게 될까? (safety margin = 1)
-정답은 최종 Loss 값이 1 증가한다.
+4) **SVM Loss에서는 정답 클래스의 score를 빼고 계산을 하는데, 만약 정답 클래스의 score도 포함해서 계산을 하면 어떻게 될까? (safety margin = 1)**  
+*최종 Loss 값이 1 증가한다.*  
 일반적으로 Loss가 0이 되어야 가장 좋다고 보는데, 정답 클래스의 score까지 포함하여 계산을 하게 되면 가장 좋은 Loss값이 1이 되고, 이는 보기 어색하다고 느껴진다.
 더불어, 정답 클래스 score까지 포함하여 계산한다고 분류기가 학습이 더 잘되는 것이 아니기 때문에, SVM Loss는 정답 클래스의 score를 빼고 계산하는 것이다.
 
-5) 최종 Loss를 전체 Loss의 합이 아닌, 전체 Loss의 평균으로 한다면 어떻게 될까?
-정답은 아무 영향을 미치지 않는다.
+5) **최종 Loss를 전체 Loss의 합이 아닌, 전체 Loss의 평균으로 한다면 어떻게 될까?**  
+*아무 영향을 미치지 않는다.*  
 SVM Loss는 각 score 값이 몇인지는 신경 쓰지 않기에, 전체 클래스의 수는 어차피 정해져 있으므로 평균을 취한다는 것은 그저 손실 함수를 re-scale 할 뿐이다.
 따라서 sclae만 변할 뿐, 결과에는 영향을 미치지 않는다.
 
-6) Loss Function을 제곱 항으로 바꾸면 어떻게 될까? 즉, max(0, s_j - s_yi + 1)이 아닌, pow(max(0, s_j - s_yi + 1), 2)로 한다면 어떻게 될까?
-정답은 결과가 달라진다는 것이다.
+6) **Loss Function을 제곱 항으로 바꾸면 어떻게 될까? 즉, max(0, s_j - s_yi + 1)이 아닌, pow(max(0, s_j - s_yi + 1), 2)로 한다면 어떻게 될까?**  
+*결과가 달라진다.*  
 제곱 항을 사용하게 되면 올바른 것과 잘못된 것 사이의 trade-off를 non-linear하게 바꿔주게 되는데, 이로 인해 손실 함수의 계산 자체가 바뀌게 된다.
 이러한 방식의 Loss Function을 squared hinge loss라고 부르며, 실제로 손실 함수를 설계할 때 사용할 수 있는 한 가지 방법으로 종종 사용된다.
 기본적인 SVM Loss에 해당하는 hinge loss는 앞서 말한 것처럼 score 값의 변화에 둔감하다.
@@ -102,14 +103,14 @@ SVM Loss는 각 score 값이 몇인지는 신경 쓰지 않기에, 전체 클래
 
 ## Regularization
 우리의 목표는 결국 Loss가 0이 되게 하는 것이다. 그렇다면 과연 Loss가 0이 되게 하는 W값은 유일하게 하나만 존재하는 값일까?
-정답은 Loss가 0이 되게 하는 W값은 여러 개 존재한다.
+그렇지 않다. Loss가 0이 되게 하는 W값은 여러 개 존재한다.
 앞서 말한 것처럼 W의 scale은 변할 수 있으며, loss가 0이 되게 하는 W값에 n배를 한다 해도 loss는 여전히 0이다.
 이는 굉장히 중요한 의미를 내포하고 있는데, 다양한 W값 중 해당 training 과정에서 loss가 0이 되는 W값을 선택하는 것은 모순적이라는 것이다.
 우리가 실제로 목표로 하는 것은 training data를 통해 분류기를 학습시키고, 이를 통해 test data를 예측하는 것이다.
 즉, training data에 완벽한 W값을 찾는 것이 아닌, test data에 높은 성능을 보이는 W값을 찾는 것이 목표이다.
 W값은 unique하지 않기에, 만약 training data에 완벽한 W값을 찾았다고 해서 그 W값이 test data에 적합한 W값이 아닐 수 있다는 것이다.
 이를 과적합(Over-Fitting)이라고 하며, 이러한 문제는 기계학습에서의 굉장히 중요한 문제이다.
-그리고 보통 이러한 과적합을 해결하는 방법을 통틀어 'Regularization' 이라고 한다.
+그리고 보통 이러한 과적합을 해결하는 방법을 통틀어 **'Regularization'** 이라고 한다.
 
 ![image](https://user-images.githubusercontent.com/37270069/113320403-7040ec80-934d-11eb-93ce-62c9ec32f144.png)
 
@@ -126,7 +127,7 @@ Regularization 방법으로는 L1 regularization, L2 regularization 등이 있�
 
 ![image](https://user-images.githubusercontent.com/37270069/113320466-8189f900-934d-11eb-8ed0-7a5be0d2dec1.png)
 
-Softmax Function은 모든 score 값에 지수를 취해서 양수가 되게 만들고, 그 지수들의 합으로 다시 정규화 시킨다.
+**Softmax Function**은 모든 score 값에 지수를 취해서 양수가 되게 만들고, 그 지수들의 합으로 다시 정규화 시킨다.
 이를 통해 Softmax Function을 거치면 결국 확률 분포를 얻을 수 있게 되고, 그것은 바로 해당 클래스일 확률이 되는 것이다.
 이러한 확률은 0과 1 사이의 값이며, 모든 확률들의 합은 1이 된다.
 결국 우리가 원하는 것은 정답 클래스에 해당하는 클래스의 확률이 1에 가깝게 계산되는 것이고, 따라서 Loss는 '-log(정답 클래스 확률)'이 된다.
@@ -136,13 +137,13 @@ Softmax Function은 모든 score 값에 지수를 취해서 양수가 되게 만
 
 이번에도 역시 Softmax Loss에 대한 직관적인 이해를 위해 몇 가지 질문들로 다시 접근해본다.
 
-1) Softmax Loss의 최솟값과 최댓값을 얼마일까?
-정답은 최솟값은 0이고, 최댓값은 무한대이다.
+1) **Softmax Loss의 최솟값과 최댓값을 얼마일까?**  
+*최솟값은 0이고, 최댓값은 무한대이다.*  
 이는 앞서 예를 든 것처럼, 정답 클래스 확률이 1이면 Loss가 0이 되고, 정답 클래스 확률이 0이면 Loss가 무한대가 된다.
 물론 이론상으로는 위와 같지만, 컴퓨터는 무한대 계산을 하지 못하고 유한 정밀도 때문에 실제로 최댓값(무한대)과 최솟값(0)에 도달할 수는 없다.
 
-2) 만약 score 값이 모두 0 근처에 모여있는 작은 수일 때, Loss는 어떻게 될까?
-정답은 -log(1 / 클래스 개수) 이다.
+2) **만약 score 값이 모두 0 근처에 모여있는 작은 수일 때, Loss는 어떻게 될까?**  
+*Loss는 -log(1 / 클래스 개수) 이다.*  
 이는 위의 SVM Loss의 sanity check와 마찬가지로 첫 번째 iteration에서 사용해볼 만한 유용한 디버깅 전략이다.
 
 SVM Loss와 Softmax Loss의 차이를 예를 들어 비교해보면 다음과 같다.
@@ -167,7 +168,7 @@ SVM Loss에서는 정답 클래스 score 값과 오답 클래스 score 값 간�
 물론 이는 정말 좋지 못한 알고리즘이고, 절대 이 방법을 사용해서는 안된다.
 
 실제로 더 나은 전략은 지역적인 기하학적(local geometry) 특성을 이용하는 것이다.
-이를 gradient descent(경사 하강법)이라 부른다.
+이를 **'gradient descent(경사 하강법)'** 이라 부른다.
 
 ![image](https://user-images.githubusercontent.com/37270069/113320822-eb0a0780-934d-11eb-8e13-cab73dac8e97.png)
 
@@ -180,7 +181,7 @@ SVM Loss에서는 정답 클래스 score 값과 오답 클래스 score 값 간�
 또한 앞서 손실 함수에서의 최종 Loss는 전체 training data의 Loss 평균으로 계산되었다.
 
 이 때 전체 training data의 크기가 굉장히 크다면 Loss를 계산하는 과정은 정말 오래 걸릴 것이며, W가 일일히 update 되려면 많은 시간이 걸리게 된다.
-따라서 실제로는 stochastic gradient descent 라는 방법을 사용한다.
+따라서 **'stochastic gradient descent'** 라는 방법을 사용한다.
 
 ![image](https://user-images.githubusercontent.com/37270069/113320689-bd24c300-934d-11eb-9718-1cc3b3062550.png)
 
@@ -196,6 +197,7 @@ SVM Loss에서는 정답 클래스 score 값과 오답 클래스 score 값 간�
 - 어떤 color 값이 많이 나오는지 count를 세서 특징을 추출하는 'Color Histogram'
 - 방향값을 히스토그램으로 표현하고, 이미지의 8x8로 자른 후 해당 값에 어떤 각도가 많은지 히스토그램으로 나타내어 특징을 추출하는 'HoG(Histogram of Oriented Gradients)'
 - 많은 이미지들을 가지고 이 이미지들을 임의로 잘라내어 k-means와 같은 알고리즘을 통해 군집화하여 각도, 색깔 등을 추출하고, 이러한 시각 단어(visual words)의 집합인 Codebook을 만들고 나면 새로운 이미지에서의 시각 단어들의 발생 빈도를 통해 이미지를 인코딩하는 'BOW(bag of words)'
+
 등의 연구가 있었다.
 
 이제는 특징을 뽑아내서 사용하는 것이 아닌 입력된 이미지에서 스스로 특징을 뽑아내도록 사용하고 있다.
