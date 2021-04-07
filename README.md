@@ -12,14 +12,19 @@
   - Date: 2021/03/29(Mon)
   - Assignee: None (Skip)
 - Lecture 2 - Image Classification
+  - Date: 2021/03/30(Tue)
   - Assignee: @jungin500
 - Lecture 3 - Loss Functions and Optimization
+  - Date: 2021/03/31(Wed)
   - Assignee: @maveltoz
 - Lecture 4 - Introduction to Neural Networks
+  - Date: 2021/04/01(Thu)
   - Assignee: @nepersica
 - Lecture 5 - Convolutional Neural Networks
+  - Date: 2021/04/02(Fri)
   - Assignee: @jungin500
 - Lecture 6 - Training Neural Networks I
+  - Date: 2021/04/12(Mon)
   - Assignee: @maveltoz
 - Lecture 7 - Training Neural Networks II
   - Assignee: @nepersica
