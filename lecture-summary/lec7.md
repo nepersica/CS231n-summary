@@ -1,4 +1,4 @@
-# Lecture 4 (Introduction to Neural Network)
+# Lecture 7 
 - 학습일: 2021/04/19
 - 주제: Training Neural Network II
 
