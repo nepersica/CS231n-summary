@@ -106,4 +106,4 @@ Step 5 : Hyperparameter Optimization
 적절한 Hyperparameter를 찾기 위한 방법으로 Random Search와 Grid Search가 있다.  
 Grid Search는 일정한 간격을 가지고 있어 best case를 찾지 못할 수 있다.  
 반면, Random Search는 말 그대로 랜덤으로 떨어지기에 더 좋은 값의 영역에 접근할 확률이 높다.  
-따라서 적절한 Hyperparameter를 찾기 위해 일반적으로 Random Search를 사용한다.  
+따라서 적절한 Hyperparameter를 찾기 위해 일반적으로 Random Search를 사용한다  
